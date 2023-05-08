@@ -5,7 +5,7 @@ import Home from "./components/Home";
 import Store from "./components/Store";
 import Cart from "./components/Cart";
 import Nav from "./components/Nav";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function App() {
   const [cartSize, setCartSize] = useState(0);
@@ -18,7 +18,6 @@ function App() {
     setCartItems((prevItems) => {
       const updatedItems = { ...prevItems };
       if (updatedItems[name]) {
-        console.log("CALL!");
         operation === "+"
           ? (updatedItems[name].quantity += 0.5)
           : (updatedItems[name].quantity -= 0.5); // If item already exists, increment the quantity
@@ -28,11 +27,6 @@ function App() {
       return updatedItems;
     });
   };
-
-  useEffect(() => {
-    console.log("ITEMS: ", cartItems);
-  }, [cartItems]);
-
   return (
     <>
       <Nav cartSize={cartSize} />

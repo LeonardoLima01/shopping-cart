@@ -9,7 +9,7 @@ import { useState } from "react";
 
 function App() {
   const [cartSize, setCartSize] = useState(0);
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState({});
 
   const handleClick = (name, price, operation) => {
     setCartSize((prevSize) =>
@@ -18,15 +18,23 @@ function App() {
     setCartItems((prevItems) => {
       const updatedItems = { ...prevItems };
       if (updatedItems[name]) {
-        operation === "+"
-          ? (updatedItems[name].quantity += 1)
-          : (updatedItems[name].quantity -= 1); // If item already exists, increment the quantity
-      } else {
-        updatedItems[name] = { quantity: 1, price }; // If item doesn't exist, initialize with quantity and price
+        updatedItems[name] = {
+          ...updatedItems[name],
+          quantity:
+            operation === "+"
+              ? updatedItems[name].quantity + 1
+              : updatedItems[name].quantity - 1,
+        };
+        if (updatedItems[name].quantity <= 0) {
+          delete updatedItems[name];
+        }
+      } else if (operation === "+") {
+        updatedItems[name] = { quantity: 1, price };
       }
       return updatedItems;
     });
   };
+
   return (
     <>
       <Nav cartSize={cartSize} />

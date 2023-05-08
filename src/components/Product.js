@@ -6,7 +6,7 @@ export default function Product(props) {
         <img className="product-image" alt="product img" src={props.image} />
       </div>
       <p>
-        <span className="bold">Price: </span> {props.price}$
+        <span className="bold">Price: </span> ${props.price}
       </p>
       {props.button && (
         <button onClick={() => props.handleClick(props.name, props.price, "+")}>

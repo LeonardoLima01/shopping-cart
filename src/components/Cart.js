@@ -104,10 +104,12 @@ export default function Cart(props) {
       {updateTotal()}
       {total > 0 && <h2>Total: ${total}</h2>}
       {total > 0 && (
-        <button onClick={() => window.location.reload()}>Check out</button>
+        <button id="checkout-button" onClick={() => window.location.reload()}>
+          Check out
+        </button>
       )}
       {total < 1 && (
-        <h1 className="animate__animated animate__fadeInUp">Empty cart!</h1>
+        <h1 className="animate__animated animate__fadeInDown">Empty cart!</h1>
       )}
     </div>
   );

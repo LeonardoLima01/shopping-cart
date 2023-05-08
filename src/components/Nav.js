@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom/dist";
-
+import { AiOutlineShoppingCart } from "react-icons/ai";
 export default function Nav(props) {
   return (
     <nav>
@@ -10,10 +10,14 @@ export default function Nav(props) {
         <li>
           <Link to="/store">Store</Link>
         </li>
-        <li>
-          <Link to="/cart">Cart</Link>
-        </li>
-        <div id="cart-size">{props.cartSize}</div>
+        <div className="cart-container">
+          <li>
+            <Link to="/cart">
+              <AiOutlineShoppingCart />
+            </Link>
+          </li>
+          <div id="cart-size">{props.cartSize}</div>
+        </div>
       </ul>
     </nav>
   );

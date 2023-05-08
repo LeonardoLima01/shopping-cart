@@ -9,7 +9,7 @@ import ram from "./../images/ram.png";
 export default function Store(props) {
   return (
     <div id="products-grid">
-      <div class="product-container">
+      <div className="product-container animate__animated animate__fadeInLeft">
         <Product
           name="GTX 1080"
           image={gtx1080}
@@ -18,7 +18,7 @@ export default function Store(props) {
           button={true}
         />
       </div>
-      <div class="product-container">
+      <div className="product-container animate__animated animate__fadeInLeft">
         <Product
           name="RTX 2080"
           image={rtx2080}
@@ -27,7 +27,7 @@ export default function Store(props) {
           button={true}
         />
       </div>
-      <div class="product-container">
+      <div className="product-container animate__animated animate__fadeInLeft">
         <Product
           name="RTX 3080"
           image={rtx3080}
@@ -36,7 +36,7 @@ export default function Store(props) {
           button={true}
         />
       </div>
-      <div class="product-container">
+      <div className="product-container animate__animated animate__fadeInLeft">
         <Product
           name="RTX 4080"
           image={rtx4080}
@@ -45,7 +45,7 @@ export default function Store(props) {
           button={true}
         />
       </div>
-      <div class="product-container">
+      <div className="product-container animate__animated animate__fadeInLeft">
         <Product
           name="SSD"
           image={ssd}
@@ -54,7 +54,7 @@ export default function Store(props) {
           button={true}
         />
       </div>
-      <div class="product-container">
+      <div className="product-container animate__animated animate__fadeInLeft">
         <Product
           name="RAM"
           image={ram}

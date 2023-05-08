@@ -1,4 +1,5 @@
 import "./style.css";
+import "animate.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Store from "./components/Store";
@@ -40,7 +41,14 @@ function App() {
         <Route path="/store" element={<Store handleClick={handleClick} />} />
         <Route
           path="/cart"
-          element={<Cart cartItems={cartItems} handleClick={handleClick} />}
+          element={
+            <Cart
+              cartItems={cartItems}
+              handleClick={handleClick}
+              setCartItems={setCartItems}
+              setCartSize={setCartSize}
+            />
+          }
         />
       </Routes>
     </>

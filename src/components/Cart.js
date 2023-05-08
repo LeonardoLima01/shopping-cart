@@ -5,6 +5,8 @@ import RTX3080 from "./../images/rtx3080.png";
 import RTX4080 from "./../images/rtx4080.png";
 import SSD from "./../images/ssd.png";
 import RAM from "./../images/ram.png";
+import { useEffect } from "react";
+import "animate.css";
 
 export default function Cart(props) {
   const { cartItems } = props;
@@ -17,6 +19,23 @@ export default function Cart(props) {
       0
     );
   };
+
+  const handleDelete = (itemName) => {
+    const updatedCartItems = { ...cartItems };
+    delete updatedCartItems[itemName];
+    props.setCartItems(updatedCartItems);
+    props.setCartSize((prevSize) => prevSize - 1);
+  };
+
+  useEffect(() => {
+    const updatedCartItems = {};
+    Object.keys(cartItems).forEach((itemName) => {
+      if (cartItems[itemName].quantity >= 1) {
+        updatedCartItems[itemName] = cartItems[itemName];
+      }
+    });
+    props.setCartItems(updatedCartItems);
+  }, []); // Empty dependency array to run the effect only once
 
   return (
     <div id="cart-container">
@@ -52,16 +71,27 @@ export default function Cart(props) {
             <li key={itemName}>
               <Product name={itemName} price={item.price} image={imageSrc} />
               <div className="quantity-container">
+                <div className="operation-container">
+                  <button
+                    className="minus-button"
+                    onClick={() => props.handleClick(itemName, item.price, "-")}
+                    disabled={item.quantity === 1}
+                  >
+                    -
+                  </button>
+                  <div className="item-quantity">{item.quantity}</div>
+                  <button
+                    className="plus-button"
+                    onClick={() => props.handleClick(itemName, item.price, "+")}
+                  >
+                    +
+                  </button>
+                </div>
                 <button
-                  onClick={() => props.handleClick(itemName, item.price, "-")}
+                  className="delete-button"
+                  onClick={() => handleDelete(itemName)}
                 >
-                  -
-                </button>
-                {item.quantity}
-                <button
-                  onClick={() => props.handleClick(itemName, item.price, "+")}
-                >
-                  +
+                  Delete
                 </button>
               </div>
             </li>
@@ -69,12 +99,13 @@ export default function Cart(props) {
         })}
       </ul>
       {updateTotal()}
-      {console.log("TOTAL: ", total)}
       {total > 0 && <h2>Total: ${total}</h2>}
       {total > 0 && (
         <button onClick={() => window.location.reload()}>Check out</button>
       )}
-      {total < 1 && <h1>Empty cart!</h1>}
+      {total < 1 && (
+        <h1 className="animate__animated animate__fadeInLeft">Empty cart!</h1>
+      )}
     </div>
   );
 }

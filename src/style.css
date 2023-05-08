@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
 hmtl,
 body {
   height: 100vh;
@@ -13,6 +15,7 @@ body {
 
 * {
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 ul {
@@ -30,6 +33,7 @@ a {
   color: #eee;
   font-weight: bold;
   font-size: 1.25vw;
+  display: flex;
 }
 
 .product-image {
@@ -65,23 +69,23 @@ h1 {
   width: 100%;
 }
 
-button {
+.product-container button {
   background-color: transparent;
   border-radius: 10px;
   padding: 10px;
   width: 100px;
-  transition: color 0.5s, background-color 0.3s;
-  border: 2px solid rgb(47, 142, 231);
+  transition: color 0.3s, background-color 0.3s;
+  border: 0;
   cursor: pointer;
   font-weight: bold;
 }
 
-button:hover {
+.product-container button:hover {
   background-color: rgb(47, 142, 231);
   color: #eee;
 }
 
-button:active {
+.product-container button:active {
   background-color: rgb(46, 113, 175);
 }
 
@@ -144,4 +148,63 @@ nav {
   height: 50%;
   display: flex;
   align-items: center;
+}
+
+.delete-button {
+  width: 70px;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: color 0.5s, background-color 0.5s;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.delete-button:hover {
+  background-color: rgb(45, 164, 233);
+  color: #eee;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.minus-button,
+.plus-button {
+  width: 30px;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.minus-button {
+  border-radius: 5px 0 0 5px;
+}
+
+.plus-button {
+  border-radius: 0px 5px 5px 0px;
+}
+
+.minus-button:hover,
+.plus-button:hover {
+  background-color: rgb(216, 211, 211);
+}
+
+.quantity-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2vh;
+}
+
+.operation-container {
+  border: 2px solid black;
+  border-radius: 5px;
+  display: flex;
+}
+
+.item-quantity {
+  display: flex;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  padding: 0 10px;
 }

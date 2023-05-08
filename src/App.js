@@ -10,13 +10,17 @@ function App() {
   const [cartSize, setCartSize] = useState(0);
   const [cartItems, setCartItems] = useState([]);
 
-  const handleClick = (name, price) => {
-    setCartSize((prevSize) => prevSize + 1);
+  const handleClick = (name, price, operation) => {
+    setCartSize((prevSize) =>
+      operation === "+" ? prevSize + 1 : prevSize - 1
+    );
     setCartItems((prevItems) => {
       const updatedItems = { ...prevItems };
       if (updatedItems[name]) {
         console.log("CALL!");
-        updatedItems[name].quantity += 0.5; // If item already exists, increment the quantity
+        operation === "+"
+          ? (updatedItems[name].quantity += 0.5)
+          : (updatedItems[name].quantity -= 0.5); // If item already exists, increment the quantity
       } else {
         updatedItems[name] = { quantity: 1, price }; // If item doesn't exist, initialize with quantity and price
       }
@@ -34,7 +38,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/store" element={<Store handleClick={handleClick} />} />
-        <Route path="/cart" element={<Cart cartItems={cartItems} />} />
+        <Route
+          path="/cart"
+          element={<Cart cartItems={cartItems} handleClick={handleClick} />}
+        />
       </Routes>
     </>
   );

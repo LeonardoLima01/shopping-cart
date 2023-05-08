@@ -10,16 +10,20 @@ export default function Cart(props) {
   const { cartItems } = props;
   let total = 0;
 
-  const updateTotal = (price, quant) => {
-    return (total += price * quant);
+  const updateTotal = () => {
+    total = Object.keys(cartItems).reduce(
+      (acc, currentItem) =>
+        acc + cartItems[currentItem].price * cartItems[currentItem].quantity,
+      0
+    );
   };
 
   return (
     <div id="cart-container">
-      <h1>Cart Items:</h1>
       <ul id="cart-items">
-        {Object.keys(cartItems).map((i) => {
-          const imageName = i.split(" ").join("");
+        {Object.keys(cartItems).map((itemName) => {
+          const item = cartItems[itemName];
+          const imageName = itemName.split(" ").join("");
           let imageSrc;
           switch (imageName) {
             case "GTX1080":
@@ -44,18 +48,33 @@ export default function Cart(props) {
               imageSrc = null;
           }
 
-          updateTotal(cartItems[i].price, cartItems[i].quantity);
-
           return (
-            <li key={i}>
-              <Product name={i} price={cartItems[i].price} image={imageSrc} />
-              <span className="bold"> Quantity: {cartItems[i].quantity}</span>
+            <li key={itemName}>
+              <Product name={itemName} price={item.price} image={imageSrc} />
+              <div className="quantity-container">
+                <button
+                  onClick={() => props.handleClick(itemName, item.price, "-")}
+                >
+                  -
+                </button>
+                {item.quantity}
+                <button
+                  onClick={() => props.handleClick(itemName, item.price, "+")}
+                >
+                  +
+                </button>
+              </div>
             </li>
           );
         })}
       </ul>
-      <h2>Total: ${total}</h2>
-      <button onClick={() => window.location.reload()}>Check out</button>
+      {updateTotal()}
+      {console.log("TOTAL: ", total)}
+      {total > 0 && <h2>Total: ${total}</h2>}
+      {total > 0 && (
+        <button onClick={() => window.location.reload()}>Check out</button>
+      )}
+      {total < 1 && <h1>Empty cart!</h1>}
     </div>
   );
 }

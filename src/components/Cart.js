@@ -20,11 +20,11 @@ export default function Cart(props) {
     );
   };
 
-  const handleDelete = (itemName) => {
+  const handleDelete = (itemName, quantity) => {
     const updatedCartItems = { ...cartItems };
     delete updatedCartItems[itemName];
     props.setCartItems(updatedCartItems);
-    props.setCartSize((prevSize) => prevSize - 1);
+    props.setCartSize((prevSize) => prevSize - quantity);
   };
 
   useEffect(() => {
@@ -68,7 +68,10 @@ export default function Cart(props) {
           }
 
           return (
-            <li key={itemName}>
+            <li
+              key={itemName}
+              className="animate__animated animate__fadeInLeft"
+            >
               <Product name={itemName} price={item.price} image={imageSrc} />
               <div className="quantity-container">
                 <div className="operation-container">
@@ -89,7 +92,7 @@ export default function Cart(props) {
                 </div>
                 <button
                   className="delete-button"
-                  onClick={() => handleDelete(itemName)}
+                  onClick={() => handleDelete(itemName, item.quantity)}
                 >
                   Delete
                 </button>
@@ -104,7 +107,7 @@ export default function Cart(props) {
         <button onClick={() => window.location.reload()}>Check out</button>
       )}
       {total < 1 && (
-        <h1 className="animate__animated animate__fadeInLeft">Empty cart!</h1>
+        <h1 className="animate__animated animate__fadeInUp">Empty cart!</h1>
       )}
     </div>
   );

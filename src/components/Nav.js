@@ -10,7 +10,7 @@ export default function Nav(props) {
         <li>
           <Link to="/store">Store</Link>
         </li>
-        <div className="cart-container">
+        <div id="nav-cart-container">
           <li>
             <Link to="/cart">
               <AiOutlineShoppingCart />

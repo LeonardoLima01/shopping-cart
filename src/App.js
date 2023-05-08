@@ -19,8 +19,8 @@ function App() {
       const updatedItems = { ...prevItems };
       if (updatedItems[name]) {
         operation === "+"
-          ? (updatedItems[name].quantity += 0.5)
-          : (updatedItems[name].quantity -= 0.5); // If item already exists, increment the quantity
+          ? (updatedItems[name].quantity += 1)
+          : (updatedItems[name].quantity -= 1); // If item already exists, increment the quantity
       } else {
         updatedItems[name] = { quantity: 1, price }; // If item doesn't exist, initialize with quantity and price
       }

@@ -104,7 +104,7 @@ export default function Cart(props) {
       {updateTotal()}
       {total > 0 && <h2>Total: ${total}</h2>}
       {total > 0 && (
-        <button id="checkout-button" onClick={() => window.location.reload()}>
+        <button id="checkout-button" onClick={() => alert("Checked out!")}>
           Check out
         </button>
       )}
